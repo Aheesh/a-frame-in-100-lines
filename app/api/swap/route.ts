@@ -67,14 +67,18 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
   return new NextResponse(
     getFrameHtmlResponse({
-      buttons: [{ action: 'link', label: 'Cancel Transaction', target: `${NEXT_PUBLIC_URL}` }],
+      buttons: [
+        {
+          label: `Tx: ${body?.untrustedData?.transactionId || '--'}`,
+        },
+      ],
       image: {
-        src: `${NEXT_PUBLIC_URL}/park-1.png`,
+        src: `${NEXT_PUBLIC_URL}/park-4.png`,
       },
-      postUrl: `${NEXT_PUBLIC_URL}`,
     }),
   );
 }
+
 export async function POST(req: NextRequest): Promise<Response> {
   return getResponse(req);
 }
