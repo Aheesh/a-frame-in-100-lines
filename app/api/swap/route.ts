@@ -73,7 +73,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
       to: '0xBA12222222228d8Ba445958a75a0704d566BF2C8',
       data: `0x${hexSwapData}`,
       value: '0',
-      gasLimit: 200000, // Note: This may be ignored by the Frame handler
+      gas: 200000, // Note: This may be ignored by the Frame handler
     }, // Type assertion
   };
   console.log('txData', txData);
