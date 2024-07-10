@@ -58,9 +58,10 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     deadline: Math.ceil(Date.now() / 1000) + 60 * 2,
   });
   console.log('encodeBatchSwapData', encodeBatchSwapData);
-  //convert encodeBatchSwapData to string starting with 0x
-  const hexData = '0x' + encodeBatchSwapData;
-  console.log('hexData', hexData);
+  //convert encodeBatchSwapData to remove the leading 0x characters
+  const hexSwapData = encodeBatchSwapData.slice(2);
+  console.log('hexSwapData', hexSwapData);
+
   //Frame Transaction response
 
   const txData: FrameTransactionResponse = {
@@ -68,7 +69,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     method: 'eth_sendTransaction',
     params: {
       to: '0xBA12222222228d8Ba445958a75a0704d566BF2C8',
-      data: `0x${hexData}`,
+      data: `0x${hexSwapData}`,
       value: '0',
       abi: abi,
     },
