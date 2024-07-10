@@ -30,6 +30,9 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     rpcUrl: `https://base-mainnet.g.alchemy.com/v2/${providerApiKey}`,
   });
 
+  const { contracts } = sdk;
+  console.log('contracts', contracts.vault.address);
+
   const tokenIn = '0x4ed4E862860beD51a9570b96d89aF5E1B0Efefed';
   const tokenOut = '0xaA4eC2d86E61632E88Db93cf6D2a42E5f458DC99';
 
@@ -55,7 +58,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
       toInternalBalance: false,
     },
     limits: [value, '0'],
-    deadline: Math.ceil(Date.now() / 1000) + 60 * 2,
+    deadline: Math.ceil(Date.now() / 1000) + 60,
   });
   console.log('encodeBatchSwapData', encodeBatchSwapData);
   //convert encodeBatchSwapData to remove the leading 0x characters
@@ -64,15 +67,15 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
   //Frame Transaction response
 
-  const txData: FrameTransactionResponse = {
+  const txData = {
     chainId: `eip155:${Network.BASE}`,
     method: 'eth_sendTransaction',
     params: {
       to: '0xBA12222222228d8Ba445958a75a0704d566BF2C8',
       data: `0x${hexSwapData}`,
       value: '0',
-      abi: abi,
-    },
+      //gas: '0x' + (100000).toString(16), // Note: This may be ignored by the Frame handler
+    }, // Type assertion
   };
   console.log('txData', txData);
 
