@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { ethers } from 'ethers';
 import {
   FrameRequest,
   getFrameMessage,
@@ -65,6 +66,11 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   const hexSwapData = encodeBatchSwapData.slice(2);
   console.log('hexSwapData', hexSwapData);
 
+  // Set gas parameters
+  const gasLimit = ethers.BigNumber.from(300000); // Adjust as needed
+  const maxFeePerGas = ethers.utils.parseUnits('1', 'gwei'); // 1 gwei
+  const maxPriorityFeePerGas = ethers.utils.parseUnits('0.1', 'gwei'); // 0.1 gwei
+
   //Frame Transaction response
   const txData = {
     chainId: `eip155:${Network.BASE}`,
@@ -73,8 +79,10 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
       to: '0xBA12222222228d8Ba445958a75a0704d566BF2C8',
       data: `0x${hexSwapData}`,
       value: '0',
-      gas: '0x30d40', // 200_000 gas in hex
-    }, // Type assertion
+      gasLimit: gasLimit,
+      maxFeePerGas: maxFeePerGas,
+      maxPriorityFeePerGas: maxPriorityFeePerGas,
+    },
   };
   console.log('txData', txData);
 
