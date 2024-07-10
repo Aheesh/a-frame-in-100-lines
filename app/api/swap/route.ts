@@ -1,7 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { FrameRequest, getFrameMessage, getFrameHtmlResponse } from '@coinbase/onchainkit/frame';
+import {
+  FrameRequest,
+  getFrameMessage,
+  FrameTransactionResponse,
+} from '@coinbase/onchainkit/frame';
 import { BalancerSDK, Network, SwapType, Swaps } from '@balancer-labs/sdk';
-import { NEXT_PUBLIC_URL } from '../../config';
+import abi from '../../_contracts/vault';
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   const body: FrameRequest = await req.json();
@@ -54,29 +58,19 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     deadline: Math.ceil(Date.now() / 1000) + 60 * 2,
   });
 
-  const txData = {
+  const txData: FrameTransactionResponse = {
     chainId: `eip155:${Network.BASE}`,
     method: 'eth_sendTransaction',
     params: {
       to: '0xBA12222222228d8Ba445958a75a0704d566BF2C8',
-      data: encodeBatchSwapData,
+      data: `0x${encodeBatchSwapData}`,
       value: '0',
+      abi: abi,
     },
   };
   console.log('txData', txData);
 
-  return new NextResponse(
-    getFrameHtmlResponse({
-      buttons: [
-        {
-          label: `Tx: ${body?.untrustedData?.transactionId || '--'}`,
-        },
-      ],
-      image: {
-        src: `${NEXT_PUBLIC_URL}/park-4.png`,
-      },
-    }),
-  );
+  return NextResponse.json(txData);
 }
 
 export async function POST(req: NextRequest): Promise<Response> {
