@@ -66,7 +66,6 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   console.log('hexSwapData', hexSwapData);
 
   //Frame Transaction response
-
   const txData = {
     chainId: `eip155:${Network.BASE}`,
     method: 'eth_sendTransaction',
@@ -74,7 +73,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
       to: '0xBA12222222228d8Ba445958a75a0704d566BF2C8',
       data: `0x${hexSwapData}`,
       value: '0',
-      //gas: '0x' + (100000).toString(16), // Note: This may be ignored by the Frame handler
+      gasLimit: 200000, // Note: This may be ignored by the Frame handler
     }, // Type assertion
   };
   console.log('txData', txData);
