@@ -37,7 +37,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   const tokenIn = '0x4ed4E862860beD51a9570b96d89aF5E1B0Efefed';
   const tokenOut = '0xaA4eC2d86E61632E88Db93cf6D2a42E5f458DC99';
 
-  const value = String(10e18);
+  const value = String(1e18);
 
   const encodeBatchSwapData = Swaps.encodeBatchSwap({
     kind: SwapType.SwapExactIn,
