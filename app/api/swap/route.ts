@@ -57,13 +57,18 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     limits: [value, '0'],
     deadline: Math.ceil(Date.now() / 1000) + 60 * 2,
   });
+  console.log('encodeBatchSwapData', encodeBatchSwapData);
+  //convert encodeBatchSwapData to string starting with 0x
+  const hexData = '0x' + encodeBatchSwapData;
+  console.log('hexData', hexData);
+  //Frame Transaction response
 
   const txData: FrameTransactionResponse = {
     chainId: `eip155:${Network.BASE}`,
     method: 'eth_sendTransaction',
     params: {
       to: '0xBA12222222228d8Ba445958a75a0704d566BF2C8',
-      data: `0x${encodeBatchSwapData}`,
+      data: `0x${hexData}`,
       value: '0',
       abi: abi,
     },
