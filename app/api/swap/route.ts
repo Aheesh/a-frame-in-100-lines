@@ -1,12 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { ethers } from 'ethers';
-import {
-  FrameRequest,
-  getFrameMessage,
-  FrameTransactionResponse,
-} from '@coinbase/onchainkit/frame';
+import { FrameRequest, getFrameMessage } from '@coinbase/onchainkit/frame';
 import { BalancerSDK, Network, SwapType, Swaps } from '@balancer-labs/sdk';
-import abi from '../../_contracts/vault';
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   const body: FrameRequest = await req.json();
@@ -71,7 +66,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   const maxFeePerGas = ethers.utils.parseUnits('1', 'gwei'); // 1 gwei
   const maxPriorityFeePerGas = ethers.utils.parseUnits('0.1', 'gwei'); // 0.1 gwei
 
-  //Frame Transaction response
+  //Frame Transaction
   const txData = {
     chainId: `eip155:${Network.BASE}`,
     method: 'eth_sendTransaction',

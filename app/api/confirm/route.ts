@@ -60,7 +60,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
       image: {
         src: `${NEXT_PUBLIC_URL}/park-1.png`,
       },
-      postUrl: `${NEXT_PUBLIC_URL}`,
+      postUrl: `${NEXT_PUBLIC_URL}/api/tx-success`,
     }),
   );
 }
