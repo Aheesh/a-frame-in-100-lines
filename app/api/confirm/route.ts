@@ -25,14 +25,14 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   });
 
   const tokenIn = '0x4ed4E862860beD51a9570b96d89aF5E1B0Efefed';
-  const tokenOut = '0xaA4eC2d86E61632E88Db93cf6D2a42E5f458DC99';
+  const tokenOut = '0xaA4eC2d86E61632E88Db93cf6D2a42E5f458DC99'; //TODO should be based on the option selected
 
   const swaps = [
     {
       poolId: '0xc8503e1a4e439800dea3424cbfc085cbeb6c3bfe000100000000000000000172',
       assetInIndex: 0,
       assetOutIndex: 1,
-      amount: String(100e18),
+      amount: String(1e18), //TODO get the amount from the user
       userData: '0x',
     },
   ];
