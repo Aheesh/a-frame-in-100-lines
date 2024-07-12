@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { ethers } from 'ethers';
 import { FrameRequest, getFrameMessage } from '@coinbase/onchainkit/frame';
 import { BalancerSDK, Network, SwapType, Swaps } from '@balancer-labs/sdk';
+import { DEGEN_ADDR, PLAYER_B_ADDR } from '../../config';
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   const body: FrameRequest = await req.json();
@@ -29,8 +30,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   const { contracts } = sdk;
   console.log('contracts', contracts.vault.address);
 
-  const tokenIn = '0x4ed4E862860beD51a9570b96d89aF5E1B0Efefed';
-  const tokenOut = '0xaA4eC2d86E61632E88Db93cf6D2a42E5f458DC99'; //TODO should be same as set in approve route
+  const tokenIn = DEGEN_ADDR;
+  const tokenOut = PLAYER_B_ADDR; //TODO should be same as set in approve route
 
   const value = String(1e18); //TODO get the amount from the user on first frame.
 
