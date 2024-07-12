@@ -52,7 +52,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
       buttons: [
         {
           action: 'tx',
-          label: `Get ${absValue}`,
+          label: `Get ${absValue} tokens`,
           target: `${NEXT_PUBLIC_URL}/api/swap`,
         },
         { action: 'link', label: 'Cancel Transaction', target: `${NEXT_PUBLIC_URL}` },
