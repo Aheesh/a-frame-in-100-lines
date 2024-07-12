@@ -14,7 +14,9 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
   if (!isValid) {
     return new NextResponse('Message not valid', { status: 500 });
   }
-
+  //const { amount } = body.input;
+  //const selectedToken = body.buttonIndex; // 1, 2, or 3
+  console.log('Message Body', body);
   const value = parseUnits('1', 18); //TODO get the amount from the user
 
   const data = encodeFunctionData({
