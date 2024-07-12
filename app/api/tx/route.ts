@@ -15,7 +15,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
     return new NextResponse('Message not valid', { status: 500 });
   }
 
-  const value = parseUnits('1', 18);
+  const value = parseUnits('1', 18); //TODO get the amount from the user
 
   const data = encodeFunctionData({
     abi: abi,
