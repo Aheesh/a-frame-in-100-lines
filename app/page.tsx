@@ -8,7 +8,7 @@ const frameMetadata = getFrameMetadata({
       action: 'tx',
       label: 'Approve & Buy Position in A',
       target: `${NEXT_PUBLIC_URL}/api/tx`,
-      postUrl: `${NEXT_PUBLIC_URL}/api/confirm`,
+      postUrl: `${NEXT_PUBLIC_URL}/api/approve`,
     },
     {
       action: 'tx',
@@ -27,7 +27,7 @@ const frameMetadata = getFrameMetadata({
     aspectRatio: '1:1',
   },
   input: {
-    text: '100 $DEGEN',
+    text: 'Enter amount (default: 100)',
   },
   postUrl: `${NEXT_PUBLIC_URL}/api/confirm`,
 });

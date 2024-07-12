@@ -2,7 +2,7 @@ import { FrameRequest, getFrameMessage } from '@coinbase/onchainkit/frame';
 import { NextRequest, NextResponse } from 'next/server';
 import { encodeFunctionData, parseEther, parseUnits, toHex, pad } from 'viem';
 import { base, baseSepolia, sepolia } from 'viem/chains';
-import { BAL_VAULT_ADDR } from '../../config';
+import { BAL_VAULT_ADDR, DEGEN_ADDR, PLAYER_A_ADDR, DRAW_ADDR, PLAYER_B_ADDR } from '../../config';
 import abi from '../../_contracts/tokenStable';
 import type { FrameTransactionResponse } from '@coinbase/onchainkit/frame';
 
@@ -14,10 +14,14 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
   if (!isValid) {
     return new NextResponse('Message not valid', { status: 500 });
   }
-  //const { amount } = body.input;
-  //const selectedToken = body.buttonIndex; // 1, 2, or 3
   console.log('Message Body', body);
-  const value = parseUnits('1', 18); //TODO get the amount from the user
+  const amount = body?.untrustedData.inputText;
+  console.log('Amount', amount);
+  const btnIndex = body?.untrustedData.buttonIndex; // 1, 2, or 3
+  console.log('Selected Token', btnIndex);
+  const selectedToken = btnIndex === 1 ? PLAYER_A_ADDR : btnIndex === 2 ? PLAYER_B_ADDR : DRAW_ADDR;
+  console.log('Selected Token Address', selectedToken);
+  const value = parseUnits(amount, 18); //TODO get the amount from the user
 
   const data = encodeFunctionData({
     abi: abi,
@@ -32,7 +36,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
     params: {
       abi: abi,
       data: data,
-      to: '0x4ed4E862860beD51a9570b96d89aF5E1B0Efefed',
+      to: DEGEN_ADDR,
       value: '0',
     },
   };

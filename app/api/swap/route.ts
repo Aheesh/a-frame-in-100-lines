@@ -30,15 +30,15 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   console.log('contracts', contracts.vault.address);
 
   const tokenIn = '0x4ed4E862860beD51a9570b96d89aF5E1B0Efefed';
-  const tokenOut = '0xaA4eC2d86E61632E88Db93cf6D2a42E5f458DC99';
+  const tokenOut = '0xaA4eC2d86E61632E88Db93cf6D2a42E5f458DC99'; //TODO should be same as set in approve route
 
-  const value = String(1e18);
+  const value = String(1e18); //TODO get the amount from the user on first frame.
 
   const encodeBatchSwapData = Swaps.encodeBatchSwap({
     kind: SwapType.SwapExactIn,
     swaps: [
       {
-        poolId: '0xc8503e1a4e439800dea3424cbfc085cbeb6c3bfe000100000000000000000172',
+        poolId: '0xc8503e1a4e439800dea3424cbfc085cbeb6c3bfe000100000000000000000172', //TODO set as a variable
         assetInIndex: 0,
         assetOutIndex: 1,
         amount: value,
