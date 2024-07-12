@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 import { FrameRequest, getFrameMessage, getFrameHtmlResponse } from '@coinbase/onchainkit/frame';
 import { NextRequest, NextResponse } from 'next/server';
-import { NEXT_PUBLIC_URL } from '../../config';
+import { DEGEN_ADDR, NEXT_PUBLIC_URL, PLAYER_B_ADDR, POOL_ID } from '../../config';
 import { get } from 'http';
 import { BalancerSDK, Network, SwapType } from '@balancer-labs/sdk';
 import { ethers } from 'ethers';
@@ -24,12 +24,12 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     rpcUrl: `https://base-mainnet.g.alchemy.com/v2/${providerApiKey}`,
   });
 
-  const tokenIn = '0x4ed4E862860beD51a9570b96d89aF5E1B0Efefed';
-  const tokenOut = '0xaA4eC2d86E61632E88Db93cf6D2a42E5f458DC99'; //TODO should be based on the option selected
+  const tokenIn = DEGEN_ADDR;
+  const tokenOut = PLAYER_B_ADDR; //TODO should be based on the option selected
 
   const swaps = [
     {
-      poolId: '0xc8503e1a4e439800dea3424cbfc085cbeb6c3bfe000100000000000000000172',
+      poolId: POOL_ID,
       assetInIndex: 0,
       assetOutIndex: 1,
       amount: String(1e18), //TODO get the amount from the user
