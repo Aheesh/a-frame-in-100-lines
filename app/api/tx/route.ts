@@ -9,19 +9,33 @@ import type { FrameTransactionResponse } from '@coinbase/onchainkit/frame';
 async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
   const body: FrameRequest = await req.json();
   // Remember to replace 'NEYNAR_ONCHAIN_KIT' with your own Neynar API key
-  let { isValid } = await getFrameMessage(body, { neynarApiKey: 'NEYNAR_ONCHAIN_KIT' });
+  let { isValid, message } = await getFrameMessage(body, { neynarApiKey: 'NEYNAR_ONCHAIN_KIT' });
 
   if (!isValid) {
     return new NextResponse('Message not valid', { status: 500 });
   }
-  console.log('Message Body', body);
-  const amount = body?.untrustedData.inputText;
+  console.log('Body', body);
+  console.log('Message', message);
+  const amount = message?.input || '100'; //If nothing entered default to 100 DEGEN
+  // body?.untrustedData.inputText;
+
   console.log('Amount', amount);
   const btnIndex = body?.untrustedData.buttonIndex; // 1, 2, or 3
   console.log('Selected Token', btnIndex);
   const selectedToken = btnIndex === 1 ? PLAYER_A_ADDR : btnIndex === 2 ? PLAYER_B_ADDR : DRAW_ADDR;
   console.log('Selected Token Address', selectedToken);
   const value = parseUnits(amount, 18); //TODO get the amount from the user
+
+  let state = {
+    amount: amount,
+    selectedToken: selectedToken,
+  };
+  try {
+    state = JSON.parse(decodeURIComponent(message?.state?.serialized ?? ''));
+    console.log('State', state);
+  } catch (e) {
+    console.error(e);
+  }
 
   const data = encodeFunctionData({
     abi: abi,
