@@ -59,7 +59,7 @@ addHyperFrame('start', {
     state: { frame: 'start' },
     postUrl: `${NEXT_PUBLIC_URL}/api/approve`,
   }),
-  1: 'road',
-  2: 'woods-bear',
-  3: 'cave-1',
+  1: 'skinIn',
+  2: 'approve',
+  3: 'swap',
 });
