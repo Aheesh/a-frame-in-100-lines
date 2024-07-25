@@ -46,9 +46,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     return new NextResponse('Button not found', { status: 404 });
   }
 
-  return new NextResponse(getHyperFrame(frame as string, text || '', message?.button));
+  // return new NextResponse(getHyperFrame(frame as string, text || '', message?.button));
 
-  /*
   return new NextResponse(
     // TODO: Return a frame
     getFrameHtmlResponse({
@@ -56,22 +55,22 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
         {
           action: 'tx',
           label: 'XL (100 $DEGEN)',
-          target: `${NEXT_PUBLIC_URL}/api/skinIn`,
+          target: `${NEXT_PUBLIC_URL}/api/approve`,
         },
         {
           action: 'tx',
           label: '2XL (200 $DEGEN)',
-          target: `${NEXT_PUBLIC_URL}/api/skinIn`,
+          target: `${NEXT_PUBLIC_URL}/api/approve`,
         },
         {
           action: 'tx',
           label: '5XL (500 $DEGEN)',
-          target: `${NEXT_PUBLIC_URL}/api/skinIn`,
+          target: `${NEXT_PUBLIC_URL}/api/approve`,
         },
         {
           action: 'tx',
           label: 'ALL-IN (1000 $DEGEN)',
-          target: `${NEXT_PUBLIC_URL}/api/skinIn`,
+          target: `${NEXT_PUBLIC_URL}/api/approve`,
         },
       ],
       image: {
@@ -79,7 +78,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
       },
       postUrl: `${NEXT_PUBLIC_URL}/api/tx-success`,
     }),
-  );*/
+  );
 }
 
 export async function POST(req: NextRequest): Promise<Response> {
