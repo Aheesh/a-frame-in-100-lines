@@ -3,7 +3,6 @@ dotenv.config();
 import { FrameRequest, getFrameMessage, getFrameHtmlResponse } from '@coinbase/onchainkit/frame';
 import { NextRequest, NextResponse } from 'next/server';
 import { DEGEN_ADDR, NEXT_PUBLIC_URL, PLAYER_B_ADDR, POOL_ID } from '../../config';
-import { get } from 'http';
 import { BalancerSDK, Network, SwapType } from '@balancer-labs/sdk';
 import { ethers } from 'ethers';
 

@@ -6,27 +6,27 @@ const frameMetadata = getFrameMetadata({
   buttons: [
     {
       action: 'tx',
-      label: 'Approve & Buy Position in A',
-      target: `${NEXT_PUBLIC_URL}/api/tx`,
+      label: 'Player A',
+      target: `${NEXT_PUBLIC_URL}/api/skinIn`,
     },
     {
       action: 'tx',
-      label: 'Approve & Buy Position in B',
-      target: `${NEXT_PUBLIC_URL}/api/tx`,
+      label: 'Player B',
+      target: `${NEXT_PUBLIC_URL}/api/skinIn`,
     },
     {
       action: 'tx',
-      label: 'Approve & Buy Position for Draw ',
-      target: `${NEXT_PUBLIC_URL}/api/tx`,
+      label: 'Draw ',
+      target: `${NEXT_PUBLIC_URL}/api/skinIn`,
     },
   ],
   image: {
     src: `${NEXT_PUBLIC_URL}/game1.webp`,
     aspectRatio: '1:1',
   },
-  input: {
-    text: 'Enter amount (default: 100)',
-  },
+  // input: {
+  //   text: 'Enter amount (default: 100)',
+  // },
   postUrl: `${NEXT_PUBLIC_URL}/api/approve`,
 });
 
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   description: 'Game 1',
   openGraph: {
     title: 'Baller Chess',
-    description: 'Toy Game 1',
+    description: 'Toy Game 1 - Who will win ? ',
     images: [`${NEXT_PUBLIC_URL}/park-1.png`],
   },
   other: {

@@ -25,6 +25,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
   const selectedToken = btnIndex === 1 ? PLAYER_A_ADDR : btnIndex === 2 ? PLAYER_B_ADDR : DRAW_ADDR;
   console.log('Selected Token Address', selectedToken);
   const value = parseUnits(amount, 18); //TODO get the amount from the user
+  console.log('Value', value);
 
   let state = {
     amount: amount,
